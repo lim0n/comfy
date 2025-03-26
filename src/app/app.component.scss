@@ -1,5 +1,34 @@
-app-root {
+.app {
     display: block;
     background: url("/assets/milky-way.avif") no-repeat center center;
-    height: 100%;
+    background-size: cover;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+
+    &-form {
+        display: flex;
+    }
+
+    --bg-even: #cccccc;
+    --bg-odd: #bbbbbb;
+    --bg-head: #dddddd;
+
+    th {
+        background: var(--bg-head);
+    }
+
+    tr {
+
+        &.lib-even td {
+            background: var(--bg-even);
+        }
+
+        &.lib-odd td {
+            background: var(--bg-odd);
+        }
+    }
 }
