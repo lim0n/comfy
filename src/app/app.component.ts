@@ -36,12 +36,6 @@ export class AppComponent {
   keyword$$ = new BehaviorSubject<string>('');
   dialog = inject(MatDialog);
 
-  openDialog(library: ILibrary): void {
-    this.dialog.open(LibraryCardComponent, {
-      data: library
-    })
-  }
-
   constructor(
     private _api: LibApiService,
   ) { }
@@ -55,6 +49,12 @@ export class AppComponent {
         map(mapLibListResponseToLibList),
         map(libs => filterLibListByFullName(libs, this.keyword$$.value)),
         takeUntil(this.destroyed$));
+  }
+
+  openDialog(library: ILibrary): void {
+    this.dialog.open(LibraryCardComponent, {
+      data: library
+    })
   }
 
   ngOnDestroy(): void {

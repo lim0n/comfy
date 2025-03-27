@@ -39,7 +39,14 @@ button {
 }
 
 button {
-    background: var(--color-invert);
+    background-color: var(--color-invert);
     color: var(--color-main);
-    cursor: pointer;
+
+    &[disabled] {
+        opacity: .75;
+    }
+    
+    &:not([disabled]) {
+        cursor: pointer;
+    }
 }
