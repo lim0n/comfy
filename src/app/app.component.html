@@ -1,6 +1,6 @@
 <form class="app-form" (submit)="displayList()">
     <input placeholder="Название библитеки" name="libname" [(ngModel)]="libInput">
-    <button [disabled]="!libInput.length">Найти</button>
+    <button [disabled]="!(libInput && libInput.length)">Найти</button>
 </form>
 
 @if (librariesList$ | async) {
