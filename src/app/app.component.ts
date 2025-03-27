@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { LibApiService } from './lib-api.service';
 import { Subject, Observable, takeUntil, map, BehaviorSubject } from 'rxjs';
 import { AsyncPipe,  NgClass } from '@angular/common';
@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HighlightPipe } from './utils/highlight.pipe';
 import { mapLibListResponseToLibList } from './utils/map-lib-list-response-to-lib-list.function';
 import { filterLibListByFullName } from './utils/filter-lib-list-by-full-name.function';
+import { MatDialog } from '@angular/material/dialog';
+import { LibraryCardComponent } from './components/library-card/library-card.component';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +34,13 @@ export class AppComponent {
   readonly destroyed$ = new Subject<void>();
   libInput!: string;
   keyword$$ = new BehaviorSubject<string>('');
+  dialog = inject(MatDialog);
+
+  openDialog(library: ILibrary): void {
+    this.dialog.open(LibraryCardComponent, {
+      data: library
+    })
+  }
 
   constructor(
     private _api: LibApiService,

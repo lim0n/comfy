@@ -21,7 +21,9 @@
                         <tr [ngClass]="{ 
                             'lib-even': i % 2 === 0,
                             'lib-odd': i % 2 === 1
-                        }">
+                        }"
+                            (click)="openDialog(library)"
+                        >
                             @if (j === 0) {
                                 <td [attr.rowspan]="library?.ObjectAddress?.length">{{ i + 1 }}</td>
                                 <td 

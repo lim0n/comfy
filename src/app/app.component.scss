@@ -24,6 +24,9 @@
     }
 
     tr {
+        &:has(td) {
+            cursor: pointer;
+        }
 
         &.lib-even td {
             background: var(--bg-even);
