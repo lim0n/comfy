@@ -11,6 +11,8 @@
 
     &-form {
         display: flex;
+        gap: var(--item-gap);
+        padding: var(--section-padding);
     }
 
     --bg-even: #cccccc;

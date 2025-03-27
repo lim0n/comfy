@@ -1,38 +1,42 @@
-<div class="app-form">
-    <input placeholder="Название библитеки" [(ngModel)]="libInput">
-    <button type="button" (click)="displayList()">Найти</button>
-</div>
+<form class="app-form" (submit)="displayList()">
+    <input placeholder="Название библитеки" name="libname" [(ngModel)]="libInput">
+    <button>Найти</button>
+</form>
 
 @if (librariesList$ | async) {
     @let keyword = keyword$$ | async;
     @let data = librariesList$ | async;
-    <table>
-        <thead>
-            <tr>
-                <th>№</th>
-                <th>Название библиотеки</th>
-                <th>Адрес</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (library of data; track $index; let i = $index) {
-                @for (address of library.ObjectAddress; track $index; let j = $index) {
-                    <tr [ngClass]="{ 
-                        'lib-even': i % 2 === 0,
-                        'lib-odd': i % 2 === 1
-                    }">
-                        @if (j === 0) {
-                            <td [attr.rowspan]="library?.ObjectAddress?.length">{{ i + 1 }}</td>
-                            <td 
-                                [attr.rowspan]="library?.ObjectAddress?.length"
-                                [innerHTML]="[ library.FullName, keyword ] | highlight"
-                            >
-                            </td>
-                        }
-                        <td>{{ address.Address }}</td>
-                    </tr>
+    @if (data?.length) {
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Название библиотеки</th>
+                    <th>Адрес</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (library of data; track $index; let i = $index) {
+                    @for (address of library.ObjectAddress; track $index; let j = $index) {
+                        <tr [ngClass]="{ 
+                            'lib-even': i % 2 === 0,
+                            'lib-odd': i % 2 === 1
+                        }">
+                            @if (j === 0) {
+                                <td [attr.rowspan]="library?.ObjectAddress?.length">{{ i + 1 }}</td>
+                                <td 
+                                    [attr.rowspan]="library?.ObjectAddress?.length"
+                                    [innerHTML]="[ library.FullName, keyword ] | highlight"
+                                >
+                                </td>
+                            }
+                            <td>{{ address.Address }}</td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    } @else {
+        <p>Ничего не найдено</p>
+    }
 }
