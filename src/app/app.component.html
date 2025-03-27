@@ -3,8 +3,9 @@
     <button type="button" (click)="displayList()">Найти</button>
 </div>
 
-@if (data$ | async) {
-    @let data = data$ | async;
+@if (librariesList$ | async) {
+    @let keyword = keyword$$ | async;
+    @let data = librariesList$ | async;
     <table>
         <thead>
             <tr>
@@ -16,15 +17,16 @@
         <tbody>
             @for (library of data; track $index; let i = $index) {
                 @for (address of library.ObjectAddress; track $index; let j = $index) {
-                    <tr [attr.libindex]="i" [attr.addressindex]="j"
-                        [ngClass]="{ 
-                            'lib-even': i % 2 === 0,
-                            'lib-odd': i % 2 === 1
-                        }">
+                    <tr [ngClass]="{ 
+                        'lib-even': i % 2 === 0,
+                        'lib-odd': i % 2 === 1
+                    }">
                         @if (j === 0) {
                             <td [attr.rowspan]="library?.ObjectAddress?.length">{{ i + 1 }}</td>
-                            <td [attr.rowspan]="library?.ObjectAddress?.length">
-                                {{ library.FullName }}
+                            <td 
+                                [attr.rowspan]="library?.ObjectAddress?.length"
+                                [innerHTML]="[ library.FullName, keyword ] | highlight"
+                            >
                             </td>
                         }
                         <td>{{ address.Address }}</td>

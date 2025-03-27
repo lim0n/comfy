@@ -1,7 +1,7 @@
 /** Модель адреса */
 export interface IAddress {
     /** Адрес */
-    Address?: string;
+    Address: string;
 
     [key: string]: any;
 }
@@ -9,9 +9,9 @@ export interface IAddress {
 /** Библиотека */
 export interface ILibrary {
     /** Полное название библиотеки */
-    FullName?: string;
+    FullName: string;
     /** Полный адрес */
-    ObjectAddress?: Partial<IAddress>[];
+    ObjectAddress: Partial<IAddress>[];
 
     [key: string]: any;
 }
