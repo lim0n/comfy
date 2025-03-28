@@ -30,11 +30,14 @@ import { LibraryCardComponent } from './components/library-card/library-card.com
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  librariesList$!: Observable<ILibrary[]>;
+  /** Список бблиотек */
   readonly destroyed$ = new Subject<void>();
+  /** Ключевое слово для фильтрации и хайлайта искомого слова в названии */
+  readonly keyword$$ = new BehaviorSubject<string>('');
+  readonly dialog = inject(MatDialog);
+  
+  librariesList$!: Observable<ILibrary[]>;
   libInput!: string;
-  keyword$$ = new BehaviorSubject<string>('');
-  dialog = inject(MatDialog);
 
   constructor(
     private _api: LibApiService,
