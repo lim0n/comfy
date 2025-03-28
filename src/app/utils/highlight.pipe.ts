@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
 
 @Pipe({
   name: 'highlight',
   standalone: true
 })
 export class HighlightPipe implements PipeTransform {
-
+  
+  /** Пайп для подсветки ключевого слова */
   transform([value, substring] : [string, string | null]): string {
     if (!substring) { return value };
     const regExpRule = new RegExp(substring, 'i');
