@@ -36,6 +36,7 @@ export class AppComponent {
   readonly keyword$$ = new BehaviorSubject<string>('');
   readonly dialog = inject(MatDialog);
   
+  /** Список библиотек */
   librariesList$!: Observable<ILibrary[]>;
   libInput!: string;
 
@@ -54,6 +55,7 @@ export class AppComponent {
         takeUntil(this.destroyed$));
   }
 
+  /** Отображение карточки библиотеки в модальном окне */
   openDialog(library: ILibrary): void {
     this.dialog.open(LibraryCardComponent, {
       data: library
